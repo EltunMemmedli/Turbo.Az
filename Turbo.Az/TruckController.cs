@@ -21,12 +21,18 @@ namespace Turbo.Az
             Truck.Add(trukcs);
         }
 
+        public ArrayList GetVehicles()
+        {
+            return Truck;
+        }
+
         public void ShowAllVehicle()
         {
+            Console.WriteLine("\nTrucks:");
             foreach (Truck Trucks in Truck)
             {
-                Console.WriteLine($"\nTrucks:\n" +
-                    $"Brand: {Trucks.Brand},\n" +
+                Console.WriteLine(
+                    $"\nBrand: {Trucks.Brand},\n" +
                     $"Model: {Trucks.Model},\n" +
                     $"Price: {Trucks.Price},\n" +
                     $"KiloMetr: {Trucks.KiloMetr}");
@@ -37,12 +43,13 @@ namespace Turbo.Az
 
         public void SearchByPrice(decimal MinPrice, decimal MaxPrice)
         {
+            Console.WriteLine("\nTrucks:");
             foreach (Truck Trucks in Truck)
             {
                 if (Trucks.Price >= MinPrice && Trucks.Price <= MaxPrice)
                 {
-                    Console.WriteLine($"\nMotors:\n" +
-                                        $"Brand: {Trucks.Brand},\n" +
+                    Console.WriteLine(
+                                        $"\nBrand: {Trucks.Brand},\n" +
                                         $"Model: {Trucks.Model},\n" +
                                         $"Price: {Trucks.Price},\n" +
                                         $"KiloMetr: {Trucks.KiloMetr}");
@@ -61,7 +68,7 @@ namespace Turbo.Az
                     valid = true;
                     Console.Clear();
 
-                    Console.WriteLine($"\nMotors:\n" +
+                    Console.WriteLine($"Trucks:\n"+
                     $"Brand: {Trucks.Brand},\n" +
                     $"Model: {Trucks.Model},\n" +
                     $"Price: {Trucks.Price},\n" +
@@ -81,7 +88,7 @@ namespace Turbo.Az
                     valid = true;
                     Console.Clear();
 
-                    Console.WriteLine($"\nMotors:\n" +
+                    Console.WriteLine($"Trucks\n" +
                     $"Brand: {Trucks.Brand},\n" +
                     $"Model: {Trucks.Model},\n" +
                     $"Price: {Trucks.Price},\n" +
@@ -89,6 +96,100 @@ namespace Turbo.Az
                 }
             }
             return valid;
+        }
+
+        public void ShowByPriceLow()
+        {
+
+            for (int i = 0; i < Truck.Count - 1; i++)
+            {
+                for (int j = 0; j < Truck.Count - 1 - i; j++)
+                {
+                    Truck current = (Truck)Truck[j];
+                    Truck next = (Truck)Truck[j + 1];
+
+                    if (current.Price > next.Price)
+                    {
+
+                        Truck[j] = next;
+                        Truck[j + 1] = current;
+                    }
+                }
+            }
+            Console.WriteLine("\nTrucks:");
+            foreach (Truck Trucks in Truck)
+            {
+                Console.WriteLine(
+                                  $"\nBrand: {Trucks.Brand},\n" +
+                                  $"Model: {Trucks.Model},\n" +
+                                  $"Price: {Trucks.Price},\n " +
+                                  $"KiloMetr: {Trucks.KiloMetr},\n" +
+                                  $"Category: {Trucks.Category}");
+            }
+        }
+
+        public void ShowByPriceHight()
+        {
+
+            for (int i = 0; i < Truck.Count - 1; i++)
+            {
+                for (int j = 0; j < Truck.Count - 1 - i; j++)
+                {
+                    Truck current = (Truck)Truck[j];
+                    Truck next = (Truck)Truck[j + 1];
+
+                    if (current.Price < next.Price)
+                    {
+
+                        Truck[j] = next;
+                        Truck[j + 1] = current;
+                    }
+                }
+            }
+            Console.WriteLine("\nTrucks:");
+            foreach (Truck Trucks in Truck)
+            {
+                Console.WriteLine(
+                                  $"\nBrand: {Trucks.Brand},\n" +
+                                  $"Model: {Trucks.Model},\n" +
+                                  $"Price: {Trucks.Price},\n " +
+                                  $"KiloMetr: {Trucks.KiloMetr},\n" +
+                                  $"Category: {Trucks.Category}");
+            }
+        }
+
+        public void SearcByKm(decimal MinKm, decimal MaxKm)
+        {
+            Console.WriteLine("\nTrucks:");
+            foreach (Truck Trucks in Truck)
+            {
+                if (Trucks.Price >= MinKm && Trucks.Price <= MaxKm)
+                {
+
+                    Console.WriteLine(
+                                        $"\nBrand: {Trucks.Brand},\n" +
+                                        $"Model: {Trucks.Model},\n" +
+                                        $"Price: {Trucks.Price},\n" +
+                                        $"KiloMetr: {Trucks.KiloMetr}");
+                }
+            }
+        }
+
+        public void AddNewVehicle(string Brand, string Model, decimal Price, decimal KiloMetr, VehicleCategory catgeory)
+        {
+            Truck NeWTruck = new(Brand, Model, Price, KiloMetr, VehicleCategory.Truck);
+
+            Truck.Add(NeWTruck);
+        }
+
+        public void UpdateVehicle(int Index, Ivehicle Updated)
+        {
+            Truck[Index - 1] = Updated;
+        }
+
+        public void RemoveVehicle(int Index)
+        {
+            Truck.RemoveAt(Index - 1);
         }
     }
 }
