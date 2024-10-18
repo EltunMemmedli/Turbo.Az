@@ -21,7 +21,7 @@ namespace Turbo.Az
             Name = name;
             Surname = surname;
             Email = email;
-            Password = password;
+            Password = password; 
         }
     }
 }
